@@ -1,0 +1,9 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    {% for post in posts %}
+        <article>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a> <small> • <time>published: {{ post.published_date }}</time></small></h2>
+        </article>
+    {% endfor %}
+{% endblock %}
