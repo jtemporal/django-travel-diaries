@@ -11,7 +11,7 @@ def map_page(request):
     locations = Location.objects.all()
     for location in locations:
         popup = f"""
-        {location.name} <br>
+        <a href="/map/{location.name}">{location.name}</a>
         """
         folium.Marker(
             location=[location.latitude, location.longitude],
@@ -24,11 +24,22 @@ def map_page(request):
 def post_list_by_location(request, name):
     location = Location.objects.get(name__iexact=name)
 
+    folium_map = folium.Map(
+        location=[location.latitude, location.longitude],
+        zoom_start=4, width=400, height=300
+    )
+    folium.Marker(
+            location=[location.latitude, location.longitude],
+            popup=location.name
+        ).add_to(folium_map)
+
+    location_map = folium_map._repr_html_()
+
     posts = Post.objects.filter(
         location=location, published_date__lte=timezone.now()
     ).order_by('-published_date')
 
     return render(
         request, 'map/post_list_by_location.html',
-        {"posts": posts, "location": location}
+        {"posts": posts, "location": location, "location_map": location_map}
     )
