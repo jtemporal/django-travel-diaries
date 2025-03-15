@@ -1,4 +1,5 @@
 import folium
+from django.http import HttpResponse
 from django.shortcuts import render
 from django.utils import timezone
 from .models import Location
@@ -17,8 +18,8 @@ def map_page(request):
             location=[location.latitude, location.longitude],
             popup=popup
         ).add_to(folium_map)
-    folium_map.save("map/templates/map/map.html")
-    return render(request, "map/map.html")
+
+    return HttpResponse(folium_map.get_root().render())
 
 
 def post_list_by_location(request, name):
