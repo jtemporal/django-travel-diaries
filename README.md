@@ -76,7 +76,6 @@ Location
 name
 latitude
 longitude
-posts
 ```
 
 # TODO
