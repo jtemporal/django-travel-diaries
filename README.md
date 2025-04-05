@@ -1,6 +1,8 @@
 # Travel Diaries - A Django app
 
-This Django application narrates the process of using adding spacial data to your [Django Girls Tutorial blog](https://tutorial.djangogirls.org/en/) in order to create a map for you Travel Diaries blog.
+This Django application narrates the process of using adding spacial data to your [Django Girls Tutorial blog](https://tutorial.djangogirls.org/en/) in order to create a map for you Travel Diaries blog. This is the accompanying sample app for the ["_Creating a Travel Diary With Django_"](https://jtemporal.com/creating-a-travel-diaries-blog-with-django/).
+
+_Note:_ I left the secret key that Django creates for development in the `settings.py` to make it easier to run after cloning this repo... So please, please, please remember to update that before deploying this to production!!! You've been warned.
 
 ## Pages
 
@@ -32,6 +34,15 @@ python manage.py runserver
 ```
 
 Login to the admin and add posts and locations then visit both `/` and `/map`.
+
+## Sample Data
+
+You also have in this repository some sample data for both locations and blog posts, make sure to create your superuser then load them into your database like so:
+
+```sh
+python manage.py loaddata sample-data/blog.json
+python manage.py loaddata sample-data/map.json
+```
 
 ## Models
 
@@ -71,10 +82,10 @@ posts
 # TODO
 
 - [x] Implement the Django Girls blog app
-- [ ] Implement the map app
-    - [ ] Create a Location model
-- [ ] Update blog post model to have a location (FK)
-- [ ] Create the map page
+- [x] Implement the map app
+    - [x] Create a Location model
+- [x] Update blog post model to have a location (FK)
+- [x] Create the map page
 
 # Wishlist
 
@@ -83,4 +94,3 @@ posts
 - Other users
 - Use `uv` for project management
 - Generate post path through slug as opposed to the pk https://docs.djangoproject.com/en/5.1/ref/urls/#django.urls.path 
-- Once a blog post is created with a pre-existing local, add that blog post to the list in the local automatically
